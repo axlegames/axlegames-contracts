@@ -3,17 +3,15 @@ require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
+  gas: 2100000,
+  gasPrice: 8000000000,
   solidity: {
     compilers: [
-      {
-        version: "0.5.16",
-      },
       {
         version: "0.8.17",
       },
     ],
   },
-
   networks: {
     bsctestnet: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",

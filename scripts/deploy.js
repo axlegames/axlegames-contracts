@@ -11,9 +11,12 @@ async function main() {
   const axleToken = await AxleToken.deploy();
   await axleToken.deployed();
   console.log(`AxleToken deployed :`, axleToken.address);
-}
 
-const token = "0x8eFe412d87dA0D4893762ddC4d958452b109d7D8";
+  const AxlePresale = await ethers.getContractFactory("AxlePresale");
+  const axlePresale = await AxlePresale.deploy();
+  await axlePresale.deployed();
+  console.log(`AxlePresale deployed :`, axlePresale.address);
+}
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.

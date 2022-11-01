@@ -315,7 +315,7 @@ contract Ownable is Context {
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
-    constructor()  {
+    constructor() {
         address msgSender = _msgSender();
         _owner = msgSender;
         emit OwnershipTransferred(address(0), msgSender);
@@ -381,7 +381,7 @@ contract AxleToken is Context, IBEP20, Ownable {
     string private _symbol;
     string private _name;
 
-    constructor()  {
+    constructor() {
         _name = "Axle Games";
         _symbol = "AXLE";
         _decimals = 18;

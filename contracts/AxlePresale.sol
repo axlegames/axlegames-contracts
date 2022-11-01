@@ -1,18 +1,6 @@
-/**
- *Submitted for verification at BscScan.com on 2022-02-04
-*/
-
-/**
- *Submitted for verification at BscScan.com on 2022-02-03
-*/
-
-/**
- *Submitted for verification at BscScan.com on 2021-06-01
-*/
-
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.17;
+import "./AxleToken.sol" as Token;
 
 /**
  * @dev Collection of functions related to the address type
@@ -42,7 +30,9 @@ library Address {
         bytes32 codehash;
         bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
         // solhint-disable-next-line no-inline-assembly
-        assembly { codehash := extcodehash(account) }
+        assembly {
+            codehash := extcodehash(account)
+        }
         return (codehash != accountHash && codehash != 0x0);
     }
 
@@ -63,15 +53,19 @@ library Address {
      * https://solidity.readthedocs.io/en/v0.5.11/security-considerations.html#use-the-checks-effects-interactions-pattern[checks-effects-interactions pattern].
      */
     function sendValue(address payable recipient, uint256 amount) internal {
-        require(address(this).balance >= amount, "Address: insufficient balance");
+        require(
+            address(this).balance >= amount,
+            "Address: insufficient balance"
+        );
 
         // solhint-disable-next-line avoid-low-level-calls, avoid-call-value
-        (bool success, ) = recipient.call{ value: amount }("");
-        require(success, "Address: unable to send value, recipient may have reverted");
+        (bool success, ) = recipient.call{value: amount}("");
+        require(
+            success,
+            "Address: unable to send value, recipient may have reverted"
+        );
     }
 }
-
-pragma solidity ^0.8.17;
 
 /*
  * @dev Provides information about the current execution context, including the
@@ -86,19 +80,17 @@ pragma solidity ^0.8.17;
 contract Context {
     // Empty internal constructor, to prevent people from mistakenly deploying
     // an instance of this contract, which should be used via inheritance.
-    constructor () internal { }
+    constructor() {}
 
-    function _msgSender() internal view virtual returns (address payable) {
-        return msg.sender;
+    function _msgSender() internal view returns (address payable) {
+        return payable(msg.sender);
     }
 
-    function _msgData() internal view virtual returns (bytes memory) {
+    function _msgData() internal view returns (bytes memory) {
         this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
         return msg.data;
     }
 }
-
-pragma solidity ^0.8.17;
 
 /**
  * @dev Interface of the BEP20 standard as defined in the EIP.
@@ -121,7 +113,9 @@ interface IBEP20 {
      *
      * Emits a {Transfer} event.
      */
-    function transfer(address recipient, uint256 amount) external returns (bool);
+    function transfer(address recipient, uint256 amount)
+        external
+        returns (bool);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
@@ -130,7 +124,10 @@ interface IBEP20 {
      *
      * This value changes when {approve} or {transferFrom} are called.
      */
-    function allowance(address owner, address spender) external view returns (uint256);
+    function allowance(address owner, address spender)
+        external
+        view
+        returns (uint256);
 
     /**
      * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.
@@ -157,7 +154,11 @@ interface IBEP20 {
      *
      * Emits a {Transfer} event.
      */
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) external returns (bool);
 
     /**
      * @dev Emitted when `value` tokens are moved from one account (`from`) to
@@ -171,10 +172,12 @@ interface IBEP20 {
      * @dev Emitted when the allowance of a `spender` for an `owner` is set by
      * a call to {approve}. `value` is the new allowance.
      */
-    event Approval(address indexed owner, address indexed spender, uint256 value);
+    event Approval(
+        address indexed owner,
+        address indexed spender,
+        uint256 value
+    );
 }
-
-pragma solidity ^0.8.17;
 
 /**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
@@ -228,7 +231,11 @@ library SafeMath {
      * Requirements:
      * - Subtraction cannot overflow.
      */
-    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+    function sub(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
         require(b <= a, errorMessage);
         uint256 c = a - b;
 
@@ -284,7 +291,11 @@ library SafeMath {
      * Requirements:
      * - The divisor cannot be zero.
      */
-    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+    function div(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
         // Solidity only automatically asserts when dividing by 0
         require(b > 0, errorMessage);
         uint256 c = a / b;
@@ -319,13 +330,15 @@ library SafeMath {
      * Requirements:
      * - The divisor cannot be zero.
      */
-    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+    function mod(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
         require(b != 0, errorMessage);
         return a % b;
     }
 }
-
-pragma solidity ^0.8.17;
 
 /**
  * @dev Implementation of the {IBEP20} interface.
@@ -351,7 +364,6 @@ pragma solidity ^0.8.17;
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IBEP20-approve}.
  */
-pragma solidity ^0.8.17;
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -368,12 +380,15 @@ pragma solidity ^0.8.17;
 contract Ownable is Context {
     address private _owner;
 
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event OwnershipTransferred(
+        address indexed previousOwner,
+        address indexed newOwner
+    );
 
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
-    constructor ()  {
+    constructor() {
         address msgSender = _msgSender();
         _owner = msgSender;
         emit OwnershipTransferred(address(0), msgSender);
@@ -411,50 +426,39 @@ contract Ownable is Context {
      * Can only be called by the current owner.
      */
     function transferOwnership(address newOwner) public virtual onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        require(
+            newOwner != address(0),
+            "Ownable: new owner is the zero address"
+        );
         emit OwnershipTransferred(_owner, newOwner);
         _owner = newOwner;
     }
 }
 
-
-/// @title PresaleBEP20 Contract
-
-pragma solidity ^0.8.17;
-
-interface AxleToken {
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-    function balanceOf(address account) external view returns (uint256);
-}
-
-contract TokenPresale is Ownable {
+contract AxlePresale is Ownable {
     using SafeMath for uint256;
 
-    AxleToken public token;
-    
+    Token.AxleToken public token;
+
     address payable public mainWallet;
-    
+
     uint256 public totalDepositedBNBBalance;
     uint256 public rewardTokenCount;
-    
+
     bool public presaleStatus;
 
     mapping(address => uint256) public deposits;
 
-    constructor(AxleToken _token)  {
-        token = _token;
-        
+    constructor() {
         mainWallet = payable(0x46D3099487DDcf724df70ed11b40109dAb586F79);
-        
-        rewardTokenCount = 8000000000000 ;
-        
+        rewardTokenCount = 8000000000000;
         presaleStatus = true;
     }
 
-    receive() payable external {
+    receive() external payable {
         deposit();
     }
-    
+
     function balanceOf(address account) public view returns (uint256) {
         return token.balanceOf(account);
     }
@@ -463,24 +467,28 @@ contract TokenPresale is Ownable {
         require(presaleStatus == true, "Presale : Presale is finished");
         require(msg.value >= 1 * 1e17, "Presale : Unsuitable Amount");
         require(msg.value <= 2 * 1e18, "Presale : Unsuitable Amount");
-        
-        
+
         uint256 tokenAmount = msg.value.div(1e9).mul(rewardTokenCount);
-        
+
         token.transferFrom(mainWallet, msg.sender, tokenAmount);
-        
+
         totalDepositedBNBBalance = totalDepositedBNBBalance.add(msg.value);
         deposits[msg.sender] = deposits[msg.sender].add(msg.value);
         emit Deposited(msg.sender, msg.value);
     }
-    
+
     function releaseFunds() external onlyOwner {
-       require(presaleStatus == false, "Presale : Presale is in progress");
+        require(presaleStatus == false, "Presale : Presale is in progress");
         mainWallet.transfer(address(this).balance);
-        totalDepositedBNBBalance = totalDepositedBNBBalance.sub(address(this).balance);
+        totalDepositedBNBBalance = totalDepositedBNBBalance.sub(
+            address(this).balance
+        );
     }
 
-    function recoverBEP20(address tokenAddress, uint256 tokenAmount) external onlyOwner {
+    function recoverBEP20(address tokenAddress, uint256 tokenAmount)
+        external
+        onlyOwner
+    {
         IBEP20(tokenAddress).transfer(this.owner(), tokenAmount);
         emit Recovered(tokenAddress, tokenAmount);
     }
@@ -488,11 +496,11 @@ contract TokenPresale is Ownable {
     function setWithdrawAddress(address payable _address) external onlyOwner {
         mainWallet = _address;
     }
-    
+
     function setRewardTokenCount(uint256 _count) external onlyOwner {
         rewardTokenCount = _count;
     }
-    
+
     function stopPresale() external onlyOwner {
         presaleStatus = false;
     }
@@ -500,7 +508,6 @@ contract TokenPresale is Ownable {
     function resumePresale() external onlyOwner {
         presaleStatus = true;
     }
-    
 
     event Deposited(address indexed user, uint256 amount);
     event Recovered(address token, uint256 amount);
