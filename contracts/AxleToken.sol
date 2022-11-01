@@ -385,7 +385,7 @@ contract AxleToken is Context, IBEP20, Ownable {
         _name = "Axle Games";
         _symbol = "AXLE";
         _decimals = 18;
-        _totalSupply = 200000000;
+        _totalSupply = 200000000*(10**18);
         _balances[msg.sender] = _totalSupply;
 
         emit Transfer(address(0), msg.sender, _totalSupply);

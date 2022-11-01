@@ -7,13 +7,14 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const AxleToken = await ethers.getContractFactory("AxleToken");
-  const axleToken = await AxleToken.deploy();
-  await axleToken.deployed();
-  console.log(`AxleToken deployed :`, axleToken.address);
+  // const AxleToken = await ethers.getContractFactory("AxleToken");
+  // console.log(AxleToken)
+  // const axleToken = await AxleToken.deploy();
+  // await axleToken.deployed();
+  // console.log(`AxleToken deployed :`, axleToken.address);
 
-  const AxlePresale = await ethers.getContractFactory("AxlePresale");
-  const axlePresale = await AxlePresale.deploy();
+  const AxlePresale = await ethers.getContractFactory("TokenPresale");
+  const axlePresale = await AxlePresale.deploy("0x9FE1eb84F87d83Ad87A532aD3ce034037039913B");
   await axlePresale.deployed();
   console.log(`AxlePresale deployed :`, axlePresale.address);
 }
