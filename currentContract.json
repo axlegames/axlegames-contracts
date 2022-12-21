@@ -1,4 +1,18 @@
 {
-  "AxleTokenContract": "0xf2c9930F8dd33a3465d2f17A142e3e9c569034EF",
-  "AxlePresaleContract": "0xb18C1260972Bf1f4092991915aF299A7B48dB76B"
+  "AxleTokenContract": "0x0Fffe22810EA0BB3463D2b8afCEBCB7F462B95a1",
+  "AxlePresaleContract": "0xb18C1260972Bf1f4092991915aF299A7B48dB76B",
+}
+
+{
+  "BIToken" : "0x19cd9B8e42d4EF62c3EA124110D5Cfd283CEaC43",
+  "BIPresale" : "0x5832E385f633b30519B3ECaDE3C5eD3d9881cf58",
+  "BISeesale" : "0x4ce1f912e06211095633961fd542e2455580721d",
+  "BIDeployer" : "0xc8e0fab45ce9c9895b8029d1835cdf450fec2756",
+}
+
+{
+  "pinkantibot_testnet" : "0xbb06F5C7689eA93d9DeACCf4aF8546C4Fe0Bf1E5",
+  "pinkantibot_mainnet" : "0x8EFDb3b642eb2a20607ffe0A56CFefF6a95Df002",
+  "uniswap_testnet": "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3",
+  "uniswap_testnet": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
 }
